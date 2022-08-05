@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./App.css";
 import Filter from "./components/Filter";
 import Form from "./components/Form";
@@ -7,6 +7,7 @@ import PersonsList from "./components/PersonsList";
 import personsService from "./services/persons";
 import { AnimatePresence } from "framer-motion";
 import DarkmodeToggle from "./components/DarkmodeToggle";
+import ThemeProvider, { ThemeContext } from "./context/ThemeContext";
 
 function App() {
   const [persons, setPersons] = useState([]);
@@ -16,6 +17,9 @@ function App() {
   const [filteredPersons, setFilteredPersons] = useState([]);
   const [notification, setNotification] = useState(null);
 
+  const context = useContext(ThemeContext);
+
+  console.log(context);
   useEffect(() => {
     personsService
       .getAll()
@@ -140,7 +144,7 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider>
       <div className="container">
         {/* <Notification message={"Esto es un test"} state={"error"} /> */}
         <AnimatePresence>
@@ -175,7 +179,7 @@ function App() {
           />
         </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 
