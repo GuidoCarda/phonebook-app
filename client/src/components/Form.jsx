@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 const Form = ({
   handleSubmit,
@@ -7,13 +7,20 @@ const Form = ({
   handleNumberChange,
   newNumber,
 }) => {
-  const [formErrors, setFormErrors] = useState({
-    name: "",
-    number: "",
-  });
+  // const [formErrors, setFormErrors] = useState({
+  //   name: "",
+  //   number: "",
+  // });
+
+  const formRef = useRef();
+  // console.log(formRef.current.childNodes);
 
   return (
-    <form className="input-form" onSubmit={handleSubmit}>
+    <form
+      className="input-form"
+      onSubmit={(evt) => handleSubmit(evt, formRef)}
+      ref={formRef}
+    >
       <label htmlFor="name">Name</label>
       <input autoFocus id="name" value={newName} onChange={handleNameChange} />
 
@@ -21,6 +28,7 @@ const Form = ({
       <input
         id="number"
         type="number"
+        min={0}
         value={newNumber}
         onChange={handleNumberChange}
       />

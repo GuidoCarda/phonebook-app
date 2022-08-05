@@ -6,7 +6,7 @@ import Notification from "./components/Notification";
 import PersonsList from "./components/PersonsList";
 import personsService from "./services/persons";
 import { AnimatePresence } from "framer-motion";
-import { generateId } from "./helpers/helpers";
+import DarkmodeToggle from "./components/DarkmodeToggle";
 
 function App() {
   const [persons, setPersons] = useState([]);
@@ -49,14 +49,22 @@ function App() {
     }, 2000);
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt, formRef) => {
     evt.preventDefault();
-    if (newName.trim() === "") return alert(`You must add a name to continue`);
-    if (newNumber.trim() === "")
-      return alert(`You must add a phone number to continue`);
+    if (newName.trim() === "") {
+      formRef.current.childNodes[1].focus();
+      return alert(`You must add a name to continue`);
+    }
 
-    if (newNumber.length > 9)
+    if (newNumber.trim() === "") {
+      formRef.current.childNodes[3].focus();
+      return alert(`You must add a phone number to continue`);
+    }
+
+    if (newNumber.length > 9) {
+      formRef.current.childNodes[3].focus();
       return alert(`The number must be less or equal than 9 characters`);
+    }
     const alreadyExist = persons.some((person) => {
       return person.name === newName;
     });
@@ -71,6 +79,7 @@ function App() {
         setPersons([person, ...persons]);
         handleNotification("success", "contact added");
       });
+      formRef.current.childNodes[1].focus();
     } else {
       const confirmUpdate = confirm(
         `${newName} already exists in the phonebook, replace the old number with the new one?`
@@ -154,6 +163,7 @@ function App() {
           />
         </div>
         <div className="right-col">
+          <DarkmodeToggle />
           {persons.length !== 0 ? (
             <Filter handleFilter={handleFilter} filterQuery={filterQuery} />
           ) : null}
