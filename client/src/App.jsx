@@ -19,7 +19,7 @@ function App() {
 
   const context = useContext(ThemeContext);
 
-  console.log(context);
+  // console.log(context);
   useEffect(() => {
     personsService
       .getAll()
