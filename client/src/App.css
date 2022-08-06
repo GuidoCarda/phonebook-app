@@ -316,7 +316,7 @@ input:focus {
 }
 
 .modal-container {
-  min-width: 500px;
+  width: 500px;
   background: white;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -325,9 +325,32 @@ input:focus {
 .modal-body {
   min-height: 8rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 1rem;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: var(--primary-color);
+}
+
+.modal-body .icon {
+  height: 2rem;
+  width: 2rem;
+  background-color: rgb(246, 226, 226);
+  border-radius: 0.3rem;
+  display: grid;
+  place-content: center;
+  font-size: 1.25rem;
+  color: rgb(188, 36, 36);
+  margin-bottom: 0.5rem;
+}
+
+.modal-body span {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-body p {
+  color: darkgrey;
 }
 
 .modal-header {
@@ -349,12 +372,12 @@ input:focus {
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
-  background: rgb(229, 229, 229);
+  background: rgb(242, 246, 246);
   padding: 1rem;
 }
 
 .modal-footer button {
   padding: 0.5rem 1rem;
-  background: rgb(46, 118, 157);
+  background: rgb(53, 143, 191);
   color: white;
 }

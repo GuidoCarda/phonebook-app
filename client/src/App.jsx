@@ -17,7 +17,7 @@ function App() {
   const [filterQuery, setFilterQuery] = useState("");
   const [filteredPersons, setFilteredPersons] = useState([]);
   const [notification, setNotification] = useState(null);
-
+  const [openModal, setOpenModal] = useState(false);
   const context = useContext(ThemeContext);
 
   // console.log(context);
@@ -148,7 +148,7 @@ function App() {
     <ThemeProvider>
       <div className="container">
         {/* <Notification message={"Esto es un test"} state={"error"} /> */}
-        <Modal />
+        {openModal && <Modal closeModal={setOpenModal} modalType={"confirm"} />}
         <AnimatePresence>
           {notification ? (
             <Notification
@@ -167,6 +167,7 @@ function App() {
             handleNumberChange={handleNumberChange}
             newNumber={newNumber}
           />
+          <button onClick={() => setOpenModal(true)}>Abrir modal</button>
         </div>
         <div className="right-col">
           <DarkmodeToggle />
