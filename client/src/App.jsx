@@ -8,6 +8,7 @@ import personsService from "./services/persons";
 import { AnimatePresence } from "framer-motion";
 import DarkmodeToggle from "./components/DarkmodeToggle";
 import ThemeProvider, { ThemeContext } from "./context/ThemeContext";
+import Modal from "./components/Modal";
 
 function App() {
   const [persons, setPersons] = useState([]);
@@ -147,6 +148,7 @@ function App() {
     <ThemeProvider>
       <div className="container">
         {/* <Notification message={"Esto es un test"} state={"error"} /> */}
+        <Modal />
         <AnimatePresence>
           {notification ? (
             <Notification
