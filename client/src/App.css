@@ -203,6 +203,8 @@ input:focus {
   box-shadow: 0 0 0 2px rgba(61, 149, 155, 0.4);
 }
 
+/* ------ notification ------ */
+
 .notification {
   position: absolute;
   top: 2rem;
@@ -212,7 +214,7 @@ input:focus {
   z-index: 1;
 
   margin: 0 auto;
-
+  background: white;
   min-width: 15rem;
   width: max-content;
   padding: 1rem 1.25rem;
@@ -220,7 +222,14 @@ input:focus {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  box-shadow: 0px 0.7px 2.7px rgba(0, 0, 0, 0.012),
+    0px 1.7px 6.9px rgba(0, 0, 0, 0.018), 0px 3.4px 14.2px rgba(0, 0, 0, 0.022),
+    0px 6.9px 29.2px rgba(0, 0, 0, 0.028), 0px 19px 80px rgba(0, 0, 0, 0.04);
 }
+
+/* .notification + .notification {
+  margin-top: 5rem;
+} */
 
 .notification h3 {
   line-height: 1;
@@ -235,14 +244,12 @@ input:focus {
   place-content: center;
 }
 
-.notification.success {
-  background: rgb(155, 233, 168);
-  color: rgb(43, 76, 47);
+.notification.success .notification-icon {
+  color: rgb(68, 194, 83);
 }
 
-.notification.error {
-  background: rgb(233, 155, 155);
-  color: rgb(76, 43, 43);
+.notification.error .notification-icon {
+  color: rgb(215, 99, 99);
 }
 
 @keyframes fade-in {

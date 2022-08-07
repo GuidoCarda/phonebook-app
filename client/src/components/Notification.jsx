@@ -1,9 +1,18 @@
 import React from "react";
-import { GrStatusGood } from "react-icons/gr";
-import { MdErrorOutline } from "react-icons/md";
+import { MdErrorOutline, MdCheckCircleOutline } from "react-icons/md";
 import { motion } from "framer-motion";
 
 const Notification = ({ message, state }) => {
+  const renderIcon = (state) => {
+    switch (state) {
+      case "error":
+        return <MdErrorOutline />;
+      case "alert":
+        return <MdErrorOutline />;
+      default:
+        return <MdCheckCircleOutline />;
+    }
+  };
   return (
     <motion.div
       key="notification"
@@ -18,8 +27,10 @@ const Notification = ({ message, state }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
+        className="notification-icon"
       >
-        {state === "success" ? <GrStatusGood /> : <MdErrorOutline />}
+        {/* {state === "success" ?  : <MdErrorOutline />} */}
+        {renderIcon(state)}
       </motion.span>
       <motion.h3
         initial={{ x: -10, opacity: 0 }}

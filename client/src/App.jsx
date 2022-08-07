@@ -58,17 +58,25 @@ function App() {
     evt.preventDefault();
     if (newName.trim() === "") {
       formRef.current.childNodes[1].focus();
-      return alert(`You must add a name to continue`);
+      return handleNotification("alert", `You must add a name to continue`);
+      // return alert(`You must add a name to continue`);
     }
 
     if (newNumber.trim() === "") {
       formRef.current.childNodes[3].focus();
-      return alert(`You must add a phone number to continue`);
+      return handleNotification(
+        "alert",
+        `You must add a phone number to continue`
+      );
     }
 
     if (newNumber.length > 9) {
       formRef.current.childNodes[3].focus();
-      return alert(`The number must be less or equal than 9 characters`);
+      return handleNotification(
+        "alert",
+        `The number must be less or equal than 9 characters`
+      );
+      // return alert();
     }
     const alreadyExist = persons.some((person) => {
       return person.name === newName;
@@ -147,7 +155,8 @@ function App() {
   return (
     <ThemeProvider>
       <div className="container">
-        {/* <Notification message={"Esto es un test"} state={"error"} /> */}
+        {/* <Notification message={"Esto es un test"} state={"success"} />
+        <Notification message={"Esto es un test"} state={"error"} /> */}
         {openModal && <Modal closeModal={setOpenModal} modalType={"confirm"} />}
         <AnimatePresence>
           {notification ? (
