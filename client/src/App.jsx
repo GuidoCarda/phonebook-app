@@ -9,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 import DarkmodeToggle from "./components/DarkmodeToggle";
 import ThemeProvider, { ThemeContext } from "./context/ThemeContext";
 import Modal from "./components/Modal";
+import { useConfirm } from "./context/ModalConfirmContext";
 
 function App() {
   const [persons, setPersons] = useState([]);
@@ -17,10 +18,13 @@ function App() {
   const [filterQuery, setFilterQuery] = useState("");
   const [filteredPersons, setFilteredPersons] = useState([]);
   const [notification, setNotification] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
-  const context = useContext(ThemeContext);
+  const confirm = useConfirm();
+  // const [modal, setModal] = useState({
+  //   show: false,
+  //   type: null,
+  //   response: null,
+  // });
 
-  // console.log(context);
   useEffect(() => {
     personsService
       .getAll()
@@ -94,9 +98,12 @@ function App() {
       });
       formRef.current.childNodes[1].focus();
     } else {
-      const confirmUpdate = confirm(
-        `${newName} already exists in the phonebook, replace the old number with the new one?`
-      );
+      // setModal({ show: true, type: "confirm" });
+      console.log(confirm);
+      confirm({ isOpen: true });
+      // const confirmUpdate = confirm(
+      //   `${newName} already exists in the phonebook, replace the old number with the new one?`
+      // );
       if (!confirmUpdate) return;
       handleUpdate(newNumber);
     }
@@ -153,45 +160,44 @@ function App() {
   };
 
   return (
-    <ThemeProvider>
-      <div className="container">
-        {/* <Notification message={"Esto es un test"} state={"success"} />
+    <div className="container">
+      {/* <Notification message={"Esto es un test"} state={"success"} />
         <Notification message={"Esto es un test"} state={"error"} /> */}
-        {openModal && <Modal closeModal={setOpenModal} modalType={"confirm"} />}
-        <AnimatePresence>
-          {notification ? (
-            <Notification
-              key="notification"
-              message={notification.message}
-              state={notification.state}
-            />
-          ) : null}
-        </AnimatePresence>
-        <div className="left-col">
-          <h1>Add a contact to your phonebook</h1>
-          <Form
-            handleSubmit={handleSubmit}
-            handleNameChange={handleNameChange}
-            newName={newName}
-            handleNumberChange={handleNumberChange}
-            newNumber={newNumber}
+      {/* {openModal && <Modal closeModal={setOpenModal} modalType={"confirm"} />} */}
+      {/* {modal.show && <Modal setModal={setModal} modalData={modal} />} */}
+      <AnimatePresence>
+        {notification ? (
+          <Notification
+            key="notification"
+            message={notification.message}
+            state={notification.state}
           />
-          <button onClick={() => setOpenModal(true)}>Abrir modal</button>
-        </div>
-        <div className="right-col">
-          <DarkmodeToggle />
-          {persons.length !== 0 ? (
-            <Filter handleFilter={handleFilter} filterQuery={filterQuery} />
-          ) : null}
-          <PersonsList
-            persons={persons}
-            filteredPersons={filteredPersons}
-            filterQuery={filterQuery}
-            handleDelete={handleDelete}
-          />
-        </div>
+        ) : null}
+      </AnimatePresence>
+      <div className="left-col">
+        <h1>Add a contact to your phonebook</h1>
+        <Form
+          handleSubmit={handleSubmit}
+          handleNameChange={handleNameChange}
+          newName={newName}
+          handleNumberChange={handleNumberChange}
+          newNumber={newNumber}
+        />
+        {/* <button onClick={() => setOpenModal(true)}>Abrir modal</button> */}
       </div>
-    </ThemeProvider>
+      <div className="right-col">
+        <DarkmodeToggle />
+        {persons.length !== 0 ? (
+          <Filter handleFilter={handleFilter} filterQuery={filterQuery} />
+        ) : null}
+        <PersonsList
+          persons={persons}
+          filteredPersons={filteredPersons}
+          filterQuery={filterQuery}
+          handleDelete={handleDelete}
+        />
+      </div>
+    </div>
   );
 }
 

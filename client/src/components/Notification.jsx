@@ -29,7 +29,6 @@ const Notification = ({ message, state }) => {
         transition={{ delay: 0.2 }}
         className="notification-icon"
       >
-        {/* {state === "success" ?  : <MdErrorOutline />} */}
         {renderIcon(state)}
       </motion.span>
       <motion.h3

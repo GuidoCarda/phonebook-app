@@ -2,7 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { IoWarningOutline } from "react-icons/io5";
 
-const Modal = ({ children, closeModal, modalType }) => {
+const Modal = ({ children, isOpen }) => {
+  console.log("modal isOpen: ", isOpen);
+  if (!isOpen) return null;
   return (
     <motion.div
       className="modal-overlay"
@@ -24,16 +26,17 @@ const Modal = ({ children, closeModal, modalType }) => {
             cuenta que una vez eliminado no podra recuperar su informacion
           </p>
         </div>
-        <footer className="modal-footer">
-          {modalType == "confirm" ? (
+        <footer className="modal-footer"></footer>
+        {/* <footer className="modal-footer">
+          {type == "confirm" ? (
             <>
-              <button onClick={() => closeModal(false)}>cancelar</button>
-              <button onClick={() => closeModal(false)}>aceptar</button>
+              <button onClick={handleCancel}>cancelar</button>
+              <button onClick={handleConfirm}>aceptar</button>
             </>
           ) : (
-            <button onClick={() => closeModal(false)}>aceptar</button>
+            <button onClick={handleConfirm}>aceptar</button>
           )}
-        </footer>
+        </footer> */}
       </motion.div>
     </motion.div>
   );
