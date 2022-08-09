@@ -214,17 +214,14 @@ input:focus {
   z-index: 1;
 
   margin: 0 auto;
-  background: white;
-  min-width: 15rem;
-  width: max-content;
+  background: var(--secondary-color);
+
+  width: min(20rem, 90vw);
   padding: 1rem 1.25rem;
   border-radius: 0.3rem;
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  box-shadow: 0px 0.7px 2.7px rgba(0, 0, 0, 0.012),
-    0px 1.7px 6.9px rgba(0, 0, 0, 0.018), 0px 3.4px 14.2px rgba(0, 0, 0, 0.022),
-    0px 6.9px 29.2px rgba(0, 0, 0, 0.028), 0px 19px 80px rgba(0, 0, 0, 0.04);
 }
 
 /* .notification + .notification {
@@ -324,7 +321,7 @@ input:focus {
 
 .modal-container {
   width: min(500px, 90vw);
-  background: white;
+  background: var(--background-color);
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -379,7 +376,8 @@ input:focus {
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
-  background: rgb(242, 246, 246);
+  background: var(--background-color);
+  border-top: 1px solid var(--secondary-color);
   padding: 1rem;
 }
 

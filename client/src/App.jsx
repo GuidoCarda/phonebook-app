@@ -130,8 +130,13 @@ function App() {
       });
   };
 
-  const handleDelete = (personToDelete) => {
-    if (confirm(`Delete ${personToDelete.name}`)) {
+  const handleDelete = async (personToDelete) => {
+    const userConfirmation = await confirm({
+      title: "Delete Contact",
+      description: `Are you sure you want to delete ${personToDelete.name} from your contacts list?`,
+      confirmBtnLabel: "delete",
+    });
+    if (userConfirmation) {
       personsService
         .deletePerson(personToDelete.id)
         .then((response) => {
