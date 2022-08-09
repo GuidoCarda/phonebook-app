@@ -19,11 +19,6 @@ function App() {
   const [filteredPersons, setFilteredPersons] = useState([]);
   const [notification, setNotification] = useState(null);
   const confirm = useConfirm();
-  // const [modal, setModal] = useState({
-  //   show: false,
-  //   type: null,
-  //   response: null,
-  // });
 
   useEffect(() => {
     personsService
@@ -99,13 +94,18 @@ function App() {
       formRef.current.childNodes[1].focus();
     } else {
       // setModal({ show: true, type: "confirm" });
-      console.log(confirm);
-      confirm({ isOpen: true });
+      // console.log(confirm);
+      confirm({
+        title: `Update Contact`,
+        description: `The person ${newName} already exists in your contacts list, do you want to update his phone number?`,
+        confirmBtnLabel: "update",
+      }).then((confirmUpdate) => {
+        if (!confirmUpdate) return;
+        handleUpdate(newNumber);
+      });
       // const confirmUpdate = confirm(
       //   `${newName} already exists in the phonebook, replace the old number with the new one?`
       // );
-      if (!confirmUpdate) return;
-      handleUpdate(newNumber);
     }
     setNewName("");
     setNewNumber("");
@@ -175,6 +175,18 @@ function App() {
         ) : null}
       </AnimatePresence>
       <div className="left-col">
+        {/* <button
+          onClick={() => {
+            return confirm({
+              title: "Update Contact",
+              description:
+                "Are you sure you want to delete x from your contact book?",
+              confirmBtnLabel: "Update",
+            }).then((choice) => console.log("users choice", choice));
+          }}
+        >
+          Generar Modal
+        </button> */}
         <h1>Add a contact to your phonebook</h1>
         <Form
           handleSubmit={handleSubmit}

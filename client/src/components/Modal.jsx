@@ -1,9 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { IoWarningOutline } from "react-icons/io5";
+import { IoPhonePortraitSharp, IoWarningOutline } from "react-icons/io5";
 
-const Modal = ({ children, isOpen }) => {
-  console.log("modal isOpen: ", isOpen);
+const Modal = ({
+  isOpen,
+  title,
+  description,
+  confirmBtnLabel,
+  onClose,
+  onConfirm,
+}) => {
   if (!isOpen) return null;
   return (
     <motion.div
@@ -20,23 +26,13 @@ const Modal = ({ children, isOpen }) => {
           <span className="icon">
             <IoWarningOutline />
           </span>
-          <span>Eliminar contacto</span>
-          <p>
-            Esta seguro que quiere elimirar a Guido de sus contactos? Tenga en
-            cuenta que una vez eliminado no podra recuperar su informacion
-          </p>
+          <span>{title}</span>
+          <p>{description}</p>
         </div>
-        <footer className="modal-footer"></footer>
-        {/* <footer className="modal-footer">
-          {type == "confirm" ? (
-            <>
-              <button onClick={handleCancel}>cancelar</button>
-              <button onClick={handleConfirm}>aceptar</button>
-            </>
-          ) : (
-            <button onClick={handleConfirm}>aceptar</button>
-          )}
-        </footer> */}
+        <footer className="modal-footer">
+          <button onClick={onClose}>cancelar</button>
+          <button onClick={onConfirm}>{confirmBtnLabel}</button>
+        </footer>
       </motion.div>
     </motion.div>
   );

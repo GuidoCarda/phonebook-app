@@ -323,7 +323,7 @@ input:focus {
 }
 
 .modal-container {
-  width: 500px;
+  width: min(500px, 90vw);
   background: white;
   border-radius: 0.5rem;
   overflow: hidden;
