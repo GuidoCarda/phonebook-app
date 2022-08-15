@@ -1,5 +1,5 @@
 :root {
-  --primary-color: rgb(40, 40, 42);
+  --primary-color: rgb(57, 57, 60);
   --secondary-color: #ebecf0;
   --background-color: #fff;
 
@@ -45,10 +45,10 @@ button {
   border: none;
   outline: none;
 }
-/* 
+
 button:focus {
-  box-shadow: 0 0 0 4px rgba(189, 189, 189, 0.4);
-} */
+  box-shadow: 0 0 0 3px var(--secondary-color);
+}
 
 .container {
   width: min(95vw, 1200px);
@@ -89,19 +89,23 @@ button:focus {
 .no-results {
   min-height: 25rem;
 
-  border: 2px solid rgb(226, 226, 226);
+  border: 2px solid var(--secondary-color);
   border-radius: 0.3rem;
   display: grid;
   place-content: center;
   text-align: center;
 
-  color: gray;
+  color: var(--primary-color);
 }
 
 .empty-list span {
   font-size: 3rem;
   margin-bottom: 1rem;
-  color: gray;
+  color: var(--primary-color);
+}
+
+.empty-list p {
+  color: var(--secondary-color);
 }
 
 @media screen and (max-width: 800px) {
@@ -206,7 +210,7 @@ input:focus {
 /* ------ notification ------ */
 
 .notification {
-  position: absolute;
+  position: fixed;
   top: 2rem;
   left: 0;
   right: 0;
@@ -216,11 +220,11 @@ input:focus {
   margin: 0 auto;
   background: var(--secondary-color);
 
-  width: min(20rem, 90vw);
+  width: min(25rem, 90vw);
   padding: 1rem 1.25rem;
   border-radius: 0.3rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.7rem;
   align-items: center;
 }
 
@@ -229,7 +233,7 @@ input:focus {
 } */
 
 .notification h3 {
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .notification span {
@@ -249,23 +253,12 @@ input:focus {
   color: rgb(215, 99, 99);
 }
 
-@keyframes fade-in {
-  0% {
-    top: -2rem;
-    opacity: 0;
-  }
-  100% {
-    top: 2rem;
-    opacity: 1;
-  }
-}
-
 .contact-icon,
 .btn-delete-contact {
   display: block;
   height: 2rem;
   width: 2rem;
-  background: rgb(218, 218, 218);
+  background: var(--secondary-color);
   border-radius: 0.3rem;
   display: grid;
   place-content: center;

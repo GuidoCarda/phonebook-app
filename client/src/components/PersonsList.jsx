@@ -3,12 +3,11 @@ import { BsArrowLeftCircle } from "react-icons/bs";
 import { MdDeleteForever, MdPerson } from "react-icons/md";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
-const PersonsList = ({
-  persons,
-  filteredPersons,
-  filterQuery,
-  handleDelete,
-}) => {
+const PersonsList = ({ persons, filterQuery, handleDelete }) => {
+  const filteredPersons = persons.filter((p) => {
+    return p.name.toLowerCase().includes(filterQuery.toLowerCase());
+  });
+
   if (persons.length === 0) {
     return (
       <motion.div

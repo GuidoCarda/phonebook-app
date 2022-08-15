@@ -16,7 +16,6 @@ function App() {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
-  const [filteredPersons, setFilteredPersons] = useState([]);
   const [notification, setNotification] = useState(null);
   const confirm = useConfirm();
 
@@ -58,7 +57,6 @@ function App() {
     if (newName.trim() === "") {
       formRef.current.childNodes[1].focus();
       return handleNotification("alert", `You must add a name to continue`);
-      // return alert(`You must add a name to continue`);
     }
 
     if (newNumber.trim() === "") {
@@ -75,8 +73,8 @@ function App() {
         "alert",
         `The number must be less or equal than 9 characters`
       );
-      // return alert();
     }
+
     const alreadyExist = persons.some((person) => {
       return person.name === newName;
     });
@@ -108,7 +106,6 @@ function App() {
 
   const handleUpdate = (newNumber) => {
     const person = persons.find((p) => p.name === newName);
-    console.log(person);
     const updatedPerson = { ...person, number: newNumber };
 
     return personsService
@@ -122,7 +119,6 @@ function App() {
         handleNotification("success", "The user number was succesfuly updated");
       })
       .catch((error) => {
-        console.log(error);
         handleNotification(
           "error",
           "The user was already deleted from the database"
@@ -152,26 +148,16 @@ function App() {
 
   const handleFilter = (evt) => {
     setFilterQuery(evt.target.value);
-
-    const filtered = persons.filter((p) =>
-      p.name.toLowerCase().includes(evt.target.value.toLowerCase())
-    );
-    setFilteredPersons(filtered);
   };
 
   return (
     <div className="container">
-      {/* <Notification message={"Esto es un test"} state={"success"} />
-        <Notification message={"Esto es un test"} state={"error"} /> */}
-      <AnimatePresence>
-        {notification ? (
-          <Notification
-            key="notification"
-            message={notification.message}
-            state={notification.state}
-          />
-        ) : null}
-      </AnimatePresence>
+      {/* <Notification
+        message={"Ada Lovelace was succesfully deleted"}
+        state={"success"}
+      /> */}
+      {/*  <Notification message={"Esto es un test"} state={"error"} /> */}
+
       <div className="left-col">
         <h1>Add a contact to your phonebook</h1>
         <Form
@@ -183,13 +169,21 @@ function App() {
         />
       </div>
       <div className="right-col">
+        <AnimatePresence>
+          {notification ? (
+            <Notification
+              key="notification"
+              message={notification.message}
+              state={notification.state}
+            />
+          ) : null}
+        </AnimatePresence>
         <DarkmodeToggle />
         {persons.length !== 0 ? (
           <Filter handleFilter={handleFilter} filterQuery={filterQuery} />
         ) : null}
         <PersonsList
           persons={persons}
-          filteredPersons={filteredPersons}
           filterQuery={filterQuery}
           handleDelete={handleDelete}
         />
